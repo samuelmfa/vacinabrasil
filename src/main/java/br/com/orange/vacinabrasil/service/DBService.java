@@ -30,9 +30,9 @@ public class DBService {
 		Usuario usuario3 = new Usuario("Alcides Alves Moreira", "cidmoreira@globo.com", "62097942032",
 				sdf.parse("29/09/1927"));
 
-		AplicacaoVacina aplic1 = new AplicacaoVacina("Oxford/AstraZeneca", sdf.parse("27/11/1982"), usuario1);
-		AplicacaoVacina aplic2 = new AplicacaoVacina("CoronaVac", sdf.parse("27/11/1982"), usuario2);
-		AplicacaoVacina aplic3 = new AplicacaoVacina("CoronaVac", sdf.parse("27/11/1982"), usuario3);
+		AplicacaoVacina aplic1 = new AplicacaoVacina("Oxford/AstraZeneca", sdf.parse("20/02/2021"), usuario1);
+		AplicacaoVacina aplic2 = new AplicacaoVacina("CoronaVac", sdf.parse("21/01/2021"), usuario2);
+		AplicacaoVacina aplic3 = new AplicacaoVacina("CoronaVac", sdf.parse("22/01/2021"), usuario3);
 
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
 		aplicacaoRepository.saveAll(Arrays.asList(aplic1, aplic2, aplic3));

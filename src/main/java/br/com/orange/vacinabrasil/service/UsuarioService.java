@@ -3,8 +3,6 @@ package br.com.orange.vacinabrasil.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,6 @@ import br.com.orange.vacinabrasil.entities.Usuario;
 import br.com.orange.vacinabrasil.exeptions.DataIntegrityException;
 import br.com.orange.vacinabrasil.exeptions.ObjectNotFoundException;
 import br.com.orange.vacinabrasil.repository.UsuarioRepository;
-
 
 @Service
 public class UsuarioService {
@@ -26,7 +23,7 @@ public class UsuarioService {
 		return usuarios;
 	}
 
-	public Usuario findById(Long id){
+	public Usuario findById(Long id) {
 		Optional<Usuario> usuario = repository.findById(id);
 		return usuario.orElseThrow(() -> new ObjectNotFoundException(
 				"Usuario não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
@@ -47,17 +44,16 @@ public class UsuarioService {
 	}
 
 	public Usuario insert(Usuario usuario) {
-		Usuario obj = findByCpfAndEmail(usuario.getNumeroDoCpf(), usuario.getEmail());
-		if (obj == null) {
+		try {
+			findByCpfAndEmail(usuario.getNumeroDoCpf(), usuario.getEmail());
 			return repository.save(usuario);
-		} else {
-			throw new RuntimeException(
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException(
 					"CPF/Email já Cadastrado! Id: " + usuario.getNumeroDoCpf() + ", Tipo: " + Usuario.class.getName());
 		}
 
 	}
-	
-	@Transactional
+
 	public Usuario update(Usuario obj) throws ObjectNotFoundException {
 		Usuario newObj = findById(obj.getId());
 		updateData(newObj, obj);
@@ -67,7 +63,7 @@ public class UsuarioService {
 
 	public void delete(Long id) {
 		findById(id);
-		try {			
+		try {
 			repository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possivel excluir esta vacinação");
