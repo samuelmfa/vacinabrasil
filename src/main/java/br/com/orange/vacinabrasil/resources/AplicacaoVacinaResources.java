@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.orange.vacinabrasil.entities.AplicacaoVacina;
 import br.com.orange.vacinabrasil.entities.Usuario;
+import br.com.orange.vacinabrasil.exeptions.ValidacaoAplicacaoVacina;
 import br.com.orange.vacinabrasil.service.AplicacaoVacinaService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -41,14 +42,15 @@ public class AplicacaoVacinaResources {
 	}
 
 	@GetMapping("/usuario/{id}")
-	public  ResponseEntity<List<AplicacaoVacina>> findByUsuarioId(@PathVariable("id") Long id) throws ObjectNotFoundException {
+	public ResponseEntity<List<AplicacaoVacina>> findByUsuarioId(@PathVariable("id") Long id)
+			throws ObjectNotFoundException {
 		List<AplicacaoVacina> obj = service.findByUsuarioId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping()
 	public ResponseEntity<Void> inserirAplicacao(@RequestBody AplicacaoVacina aplicacao)
-			throws ObjectNotFoundException {
+			throws ValidacaoAplicacaoVacina {
 		AplicacaoVacina novaAplicacao = service.insert(aplicacao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaAplicacao.getId())
 				.toUri();

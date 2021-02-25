@@ -11,6 +11,7 @@ import br.com.orange.vacinabrasil.entities.AplicacaoVacina;
 import br.com.orange.vacinabrasil.entities.Usuario;
 import br.com.orange.vacinabrasil.exeptions.DataIntegrityException;
 import br.com.orange.vacinabrasil.exeptions.ObjectNotFoundException;
+import br.com.orange.vacinabrasil.exeptions.ValidacaoAplicacaoVacina;
 import br.com.orange.vacinabrasil.repository.AplicacaoVacinaRepository;
 
 @Service
@@ -37,10 +38,16 @@ public class AplicacaoVacinaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Esse Usuario não Existe!"));
 	}
 
-	public AplicacaoVacina insert(AplicacaoVacina aplicacao) {
-		Usuario usuario = usuarioService.findById(aplicacao.getUsuario().getId());
-		aplicacao.setUsuario(usuario);
-		return repository.save(aplicacao);
+	public AplicacaoVacina insert(AplicacaoVacina aplicacao) throws ValidacaoAplicacaoVacina {
+		List<AplicacaoVacina> lista = findByUsuarioId(aplicacao.getUsuario().getId());
+		if (lista.size() < 2) {
+			Usuario usuario = usuarioService.findById(aplicacao.getUsuario().getId());
+			aplicacao.setUsuario(usuario);
+			return repository.save(aplicacao);
+		} else {
+			throw new ValidacaoAplicacaoVacina("Esse Usuario ja recebeu duas Doses!");
+		}
+
 	}
 
 	public AplicacaoVacina update(AplicacaoVacina obj) {
