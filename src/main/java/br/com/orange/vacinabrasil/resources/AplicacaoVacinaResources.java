@@ -32,28 +32,29 @@ public class AplicacaoVacinaResources {
 		List<AplicacaoVacina> aplicacoes = service.findAll();
 		return ResponseEntity.ok().body(aplicacoes);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<AplicacaoVacina> findById(@PathVariable("id") Long id) throws ObjectNotFoundException {
 		AplicacaoVacina obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 
 	}
-	
+
 	@GetMapping("/usuario/{id}")
-	public ResponseEntity<AplicacaoVacina> findByUsuarioId(@PathVariable("id") Long id) throws ObjectNotFoundException {
-		AplicacaoVacina obj = service.findByUsuarioId(id);
+	public  ResponseEntity<List<AplicacaoVacina>> findByUsuarioId(@PathVariable("id") Long id) throws ObjectNotFoundException {
+		List<AplicacaoVacina> obj = service.findByUsuarioId(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@PostMapping()
-	public ResponseEntity<Void> inserirAplicacao(@RequestBody AplicacaoVacina aplicacao) throws ObjectNotFoundException {
+	public ResponseEntity<Void> inserirAplicacao(@RequestBody AplicacaoVacina aplicacao)
+			throws ObjectNotFoundException {
 		AplicacaoVacina novaAplicacao = service.insert(aplicacao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaAplicacao.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@PutMapping()
 	public ResponseEntity<Void> update(@RequestBody AplicacaoVacina obj) throws ObjectNotFoundException {
 		AplicacaoVacina aplicacao = service.update(obj);

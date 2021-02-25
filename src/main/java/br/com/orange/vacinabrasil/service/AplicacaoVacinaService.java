@@ -32,8 +32,8 @@ public class AplicacaoVacinaService {
 
 	}
 
-	public AplicacaoVacina findByUsuarioId(Long id) {
-		Optional<AplicacaoVacina> obj = Optional.ofNullable(repository.findByUsuarioId(id));
+	public List<AplicacaoVacina> findByUsuarioId(Long id) {
+		Optional<List<AplicacaoVacina>> obj = Optional.ofNullable(repository.findByUsuarioId(id));
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Esse Usuario não Existe!"));
 	}
 
