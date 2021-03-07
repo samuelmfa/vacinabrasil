@@ -25,8 +25,7 @@ public class UsuarioService {
 
 	public Usuario findById(Long id) {
 		Optional<Usuario> usuario = repository.findById(id);
-		return usuario.orElseThrow(() -> new ObjectNotFoundException(
-				"Usuario não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
+		return usuario.orElseThrow(() -> new ObjectNotFoundException("Usuario não encontrado!"));
 
 	}
 
@@ -48,16 +47,19 @@ public class UsuarioService {
 			findByCpfAndEmail(usuario.getNumeroDoCpf(), usuario.getEmail());
 			return repository.save(usuario);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException(
-					"CPF/Email já Cadastrado! Id: " + usuario.getNumeroDoCpf() + ", Tipo: " + Usuario.class.getName());
+			throw new DataIntegrityException("CPF/Email já Cadastrado!");
 		}
 
 	}
 
 	public Usuario update(Usuario obj) throws ObjectNotFoundException {
-		Usuario newObj = findById(obj.getId());
-		updateData(newObj, obj);
-		return repository.save(newObj);
+		try {
+			Usuario newObj = findById(obj.getId());
+			updateData(newObj, obj);
+			return repository.save(newObj);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("CPF/Email já Cadastrado!");
+		}
 
 	}
 

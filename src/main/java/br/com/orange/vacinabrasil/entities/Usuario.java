@@ -18,6 +18,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.orange.vacinabrasil.entities.validators.DateValidatorInt;
+
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuario implements Serializable {
@@ -31,17 +33,17 @@ public class Usuario implements Serializable {
 	private String nome;
 
 	@Column(unique = true, nullable = false)
-	@NotEmpty(message= "Preenchimento Obrigatório")
+	@NotEmpty(message = "Preenchimento Obrigatório")
 	@Email(message = "Email Inválido")
 	private String email;
 
 	@Column(unique = true, nullable = false)
-	@NotEmpty(message= "Preenchimento Obrigatório")
+	@NotEmpty(message = "Preenchimento Obrigatório")
 	@CPF
 	private String numeroDoCpf;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)	
+	@DateValidatorInt(message = "Data de nascimento inválida")
 	private Date dataDeNascimento;
 
 	public Usuario() {
@@ -93,8 +95,6 @@ public class Usuario implements Serializable {
 	public void setDataDeNascimento(Date dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
-	
-	
 
 	@Override
 	public String toString() {

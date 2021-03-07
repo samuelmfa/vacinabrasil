@@ -52,7 +52,7 @@ public class UsuarioResources {
 	}
 
 	@PutMapping()
-	public ResponseEntity<Void> update( @Valid @RequestBody Usuario obj) throws ObjectNotFoundException {
+	public ResponseEntity<Void> update(@Valid @RequestBody Usuario obj) throws ObjectNotFoundException {
 		Usuario usuario = service.update(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId())
 				.toUri();
