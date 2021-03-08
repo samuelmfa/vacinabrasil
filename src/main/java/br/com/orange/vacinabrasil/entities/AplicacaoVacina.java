@@ -18,8 +18,9 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
+
+import br.com.orange.vacinabrasil.entities.validators.DateVacinaValidatorInt;
 
 @Entity
 @Table(name = "tb_aplicacao_vacina")
@@ -35,7 +36,7 @@ public class AplicacaoVacina implements Serializable {
 	private String nomeDaVacina;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateVacinaValidatorInt(message = "Data de aplicação inválida")
 	private Date dataDaAplicacao;
 
 	@ManyToOne

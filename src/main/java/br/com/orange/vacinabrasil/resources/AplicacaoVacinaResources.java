@@ -3,6 +3,8 @@ package br.com.orange.vacinabrasil.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +51,7 @@ public class AplicacaoVacinaResources {
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> inserirAplicacao(@RequestBody AplicacaoVacina aplicacao)
+	public ResponseEntity<Void> inserirAplicacao(@Valid @RequestBody AplicacaoVacina aplicacao)
 			throws ValidacaoAplicacaoVacina {
 		AplicacaoVacina novaAplicacao = service.insert(aplicacao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaAplicacao.getId())
@@ -58,7 +60,7 @@ public class AplicacaoVacinaResources {
 	}
 
 	@PutMapping()
-	public ResponseEntity<Void> update(@RequestBody AplicacaoVacina obj) throws ObjectNotFoundException {
+	public ResponseEntity<Void> update(@Valid @RequestBody AplicacaoVacina obj) throws ObjectNotFoundException {
 		AplicacaoVacina aplicacao = service.update(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aplicacao.getId())
 				.toUri();

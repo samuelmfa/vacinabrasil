@@ -16,8 +16,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.com.orange.vacinabrasil.entities.validators.DateValidatorInt;
 
 @Entity
@@ -42,7 +40,7 @@ public class Usuario implements Serializable {
 	@CPF
 	private String numeroDoCpf;
 
-	@Temporal(TemporalType.TIMESTAMP)	
+	@Temporal(TemporalType.TIMESTAMP)
 	@DateValidatorInt(message = "Data de nascimento inválida")
 	private Date dataDeNascimento;
 

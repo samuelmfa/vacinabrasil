@@ -33,7 +33,7 @@ public class DBService {
 				sdf.parse("1927-09-29T03:00:00.000Z"));
 
 		AplicacaoVacina aplic1 = new AplicacaoVacina("Oxford/AstraZeneca", sdf.parse("2021-02-20T03:00:00.000Z"), usuario1);
-		AplicacaoVacina aplic2 = new AplicacaoVacina("CoronaVac", sdf.parse("2021-01-21T03:00:00.000Z"), usuario2);
+		AplicacaoVacina aplic2 = new AplicacaoVacina("CoronaVac", sdf.parse("2021-01-21T03:00:00.000Z"), usuario3);
 		AplicacaoVacina aplic3 = new AplicacaoVacina("CoronaVac", sdf.parse("2021-01-22T03:00:00.000Z"), usuario3);
 
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));

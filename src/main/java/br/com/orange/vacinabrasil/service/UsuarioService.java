@@ -38,7 +38,8 @@ public class UsuarioService {
 	}
 
 	public Usuario findByCPF(String cpf) {
-		return repository.findByNumeroDoCpf(cpf);
+		Optional<Usuario> usuario = Optional.ofNullable(repository.findByNumeroDoCpf(cpf));
+		return usuario.orElseThrow(() -> new ObjectNotFoundException("Paciente não encontrado!"));
 
 	}
 

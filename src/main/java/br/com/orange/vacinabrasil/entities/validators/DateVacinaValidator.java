@@ -3,16 +3,17 @@ package br.com.orange.vacinabrasil.entities.validators;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class DateValidator implements ConstraintValidator<DateValidatorInt, Date> {
+public class DateVacinaValidator implements ConstraintValidator<DateVacinaValidatorInt, Date> {
 
 	@Override
-	public void initialize(DateValidatorInt endDate) {
+	public void initialize(DateVacinaValidatorInt endDate) {
 	}
 
 	@Override
@@ -20,8 +21,9 @@ public class DateValidator implements ConstraintValidator<DateValidatorInt, Date
 		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
 
 		try {
-
-			Date startDate = sdf.parse("1920-01-01T00:00:00.000Z");
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			Date startDate = sdf.parse(year + "-00-00T00:00:00.000Z");
 			Date data = new Date();
 			Date endDate = sdf.parse(sdf.format(data));
 			return date.after(startDate) && date.before(endDate);

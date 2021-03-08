@@ -42,8 +42,15 @@ public class UsuarioResources {
 
 	}
 
-	@PostMapping()	
-	public ResponseEntity<Void> insert(@Valid @RequestBody  Usuario usuario) {
+	@GetMapping("/cpf/{cpf}")
+	public ResponseEntity<Usuario> findByCpf(@PathVariable("cpf") String cpf) throws ObjectNotFoundException {
+		Usuario obj = service.findByCPF(cpf);
+		return ResponseEntity.ok().body(obj);
+
+	}
+
+	@PostMapping()
+	public ResponseEntity<Void> insert(@Valid @RequestBody Usuario usuario) {
 		Usuario novoUsuario = service.insert(usuario);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoUsuario.getId())
 				.toUri();

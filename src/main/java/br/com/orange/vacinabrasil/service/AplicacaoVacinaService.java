@@ -45,7 +45,7 @@ public class AplicacaoVacinaService {
 			aplicacao.setUsuario(usuario);
 			return repository.save(aplicacao);
 		} else {
-			throw new ValidacaoAplicacaoVacina("Esse Usuario ja recebeu duas Doses!");
+			throw new ValidacaoAplicacaoVacina("Esse Paciente já recebeu duas Doses!");
 		}
 
 	}
