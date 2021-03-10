@@ -19,7 +19,7 @@ public class DevConfig {
 	@Bean
 	public boolean instanciateDataBase() throws ParseException {
 
-		dbService.instanciateDatabase();
+		//dbService.instanciateDatabase();
 		return true;
 	}
 
