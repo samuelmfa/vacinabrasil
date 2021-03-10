@@ -16,6 +16,10 @@ spring:
         format_sql: true        
     show-sql: true
     
+  devtools:
+   livereload:
+    enabled: true
+       
 management:
   endpoints:
     enabled-by-default: false
