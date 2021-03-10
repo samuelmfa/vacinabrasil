@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.orange.vacinabrasil.entities.Usuario;
@@ -19,7 +20,7 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 
 	public List<Usuario> findAll() {
-		List<Usuario> usuarios = repository.findAll();
+		List<Usuario> usuarios = repository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		return usuarios;
 	}
 
