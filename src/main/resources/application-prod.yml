@@ -12,7 +12,7 @@ spring:
   driver-class-name: com.mysql.cj.jdbc.Driver
   url: jdbc:mysql://app-vacina-db.mysql.database.azure.com:3306/vacinacao?serverTimezone=UTC&useSSL=true&requireSSL=false
   username: appvacinadb@app-vacina-db
-  password: "@ppVacinaDb" 
+  password: "@VacinaBrasil" 
   initialization-mode: always
  jpa:
   hibernate:
