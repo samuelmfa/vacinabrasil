@@ -10,13 +10,13 @@ logging:
 spring:
  datasource:
   driver-class-name: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://app-vacina-db.mysql.database.azure.com:3306/vacinacao?serverTimezone=UTC&useSSL=true&requireSSL=false
-  username: appvacinadb@app-vacina-db
-  password: "@VacinaBrasil" 
+  url: jdbc:mysql://us-cdbr-east-03.cleardb.com:3306/heroku_dcddf2366ea4f96?reconnect=true
+  username: ${HEROKU-VACINA-USER}
+  password: ${HEROKU-VACINA-PASS}
   initialization-mode: always
  jpa:
   hibernate:
-   ddl-auto: update
+   ddl-auto: none
    
 management:
   endpoints:
