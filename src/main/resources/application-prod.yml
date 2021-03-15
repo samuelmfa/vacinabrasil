@@ -1,29 +1,18 @@
-
-
-logging:
- level:
-   org:
-    springframework:
-     jdbc:
-      core: DEBUG
-      
-spring:
- datasource:
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://us-cdbr-east-03.cleardb.com:3306/heroku_dcddf2366ea4f96?reconnect=true
-  username: ${HEROKU-VACINA-USER}
-  password: ${HEROKU-VACINA-PASS}
-  initialization-mode: always
- jpa:
-  hibernate:
-   ddl-auto: none
-   
 management:
-  endpoints:
-    enabled-by-default: false
   endpoint:
-    info:
-      enabled: true   
     health:
       enabled: true
-    
+    info:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: 'always'
+    password: ${HEROKU_VACINA_PASS}
+    url: jdbc:mysql://us-cdbr-east-03.cleardb.com:3306/heroku_dcddf2366ea4f96?reconnect=true
+    username: b4382ad81a1950
+  jpa:
+    hibernate:
+      ddl-auto: 'none  '
